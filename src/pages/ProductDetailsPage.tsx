@@ -238,7 +238,7 @@ const ProductDetailsPage = () => {
                 <span className="text-gray-700">30-day return policy</span>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
 
         {/* Product Tabs */}
