@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, MessageCircle, Users, Award } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle } from 'lucide-react';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -320,6 +320,7 @@ const ContactPage = () => {
       </section>
 
       {/* FAQ Section */}
+      {/* 
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -359,6 +360,7 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Team Section */}
       <section className="py-16 bg-gray-50">

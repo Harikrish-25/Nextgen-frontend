@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Search, Filter, Star, ShoppingCart, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
+  const navigate = useNavigate();
 
   const categories = [
     { id: 'all', name: 'All Products' },
@@ -95,26 +96,40 @@ const ProductsPage = () => {
     return a.name.localeCompare(b.name);
   });
 
+  const convertToINR = (usdPrice: number) => (usdPrice * 83).toFixed(2);
+
+  // Add to cart using localStorage
+  const handleAddToCart = (product: any) => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const existing = cart.find((item: any) => item.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    navigate('/cart'); // Redirect to cart page after adding
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Healthy Products</h1>
-          <p className="text-lg text-gray-600">Discover our range of preservative-free, natural products</p>
+          <h1 className="text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">Healthy Products</h1>
+          <p className="text-lg text-gray-500">Discover our range of preservative-free, natural products</p>
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <div className="bg-white p-6 rounded-xl shadow-md mb-8">
           <div className="flex flex-col lg:flex-row gap-4 items-center">
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               />
             </div>
             
@@ -122,7 +137,7 @@ const ProductsPage = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>{category.name}</option>
@@ -132,7 +147,7 @@ const ProductsPage = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-transparent"
               >
                 <option value="name">Sort by Name</option>
                 <option value="price">Sort by Price</option>
@@ -145,37 +160,28 @@ const ProductsPage = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sortedProducts.map(product => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-200 overflow-hidden">
-              <div className="relative">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-48 object-cover"
-                />
-                <button className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-md hover:bg-gray-50 transition-colors duration-200">
-                  <Heart className="h-5 w-5 text-gray-600" />
-                </button>
-                <div className="absolute top-4 left-4">
-                  <span className="bg-emerald-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                    {product.tags[0]}
-                  </span>
+            <div key={product.id} className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+              <Link to={`/products/${product.id}`} className="block">
+                <div className="relative">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-48 object-cover"
+                    onError={(e) => { (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x300'; }}
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-teal-600 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                      {product.tags[0]}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              
+              </Link>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{product.name}</h3>
+                <p className="text-gray-500 text-sm mb-4">{product.description}</p>
                 
                 <div className="flex items-center mb-4">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-600 ml-2">({product.reviews} reviews)</span>
+                  <span className="text-sm text-gray-500">({product.reviews} reviews)</span>
                 </div>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -187,10 +193,15 @@ const ProductsPage = () => {
                 </div>
                 
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900">${product.price}</span>
-                  <button className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors duration-200 flex items-center space-x-2">
-                    <ShoppingCart className="h-4 w-4" />
-                    <span>Add to Cart</span>
+                  <span className="text-2xl font-bold text-gray-800">₹{convertToINR(product.price)}</span>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault(); // Prevent navigation
+                      handleAddToCart(product);
+                    }}
+                    className="bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700 transition-colors duration-300"
+                  >
+                    Add to Cart
                   </button>
                 </div>
               </div>

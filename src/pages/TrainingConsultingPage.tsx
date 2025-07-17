@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, Users, TrendingUp, Award, Calendar, Download, Phone, Mail, Star, ArrowRight } from 'lucide-react';
+import { CheckCircle, Users, TrendingUp, Award, Download, Phone, Star, ArrowRight } from 'lucide-react';
 
 const TrainingConsultingPage = () => {
   const [selectedService, setSelectedService] = useState('training');

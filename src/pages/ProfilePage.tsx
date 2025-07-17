@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Package, MapPin, CreditCard, Bell, Shield, Edit3, Calendar, CheckCircle, Clock, Truck } from 'lucide-react';
+import { User, Package, MapPin, CreditCard, Bell, Shield, Edit3,  CheckCircle, Clock, Truck } from 'lucide-react';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');

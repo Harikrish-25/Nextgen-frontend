@@ -8,7 +8,7 @@ import ProductDetailsPage from './pages/ProductDetailsPage';
 import ProfilePage from './pages/ProfilePage';
 import AwarenessProgramPage from './pages/AwarenessProgramPage';
 import TrainingConsultingPage from './pages/TrainingConsultingPage';
-import BlogPage from './pages/BlogPage';
+
 import ContactPage from './pages/ContactPage';
 import CartPage from './pages/CartPage';
 import AdminDashboard from './pages/AdminDashboard';
@@ -26,7 +26,6 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/awareness-program" element={<AwarenessProgramPage />} />
             <Route path="/training-consulting" element={<TrainingConsultingPage />} />
-            <Route path="/blog" element={<BlogPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/admin" element={<AdminDashboard />} />

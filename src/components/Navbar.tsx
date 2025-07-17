@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingCart, User, Leaf } from 'lucide-react';
 
@@ -11,7 +11,6 @@ const Navbar = () => {
     { name: 'Products', path: '/products' },
     { name: 'Awareness Program', path: '/awareness-program' },
     { name: 'Training & Consulting', path: '/training-consulting' },
-    { name: 'Blog', path: '/blog' },
     { name: 'Contact', path: '/contact' },
   ];
 
