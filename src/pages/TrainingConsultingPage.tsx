@@ -165,43 +165,43 @@ const TrainingConsultingPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="space-y-4 md:space-y-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-center lg:text-left">
                 Training & Consulting Services
               </h1>
-              <p className="text-xl text-blue-100 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed text-center lg:text-left">
                 Empower your organization with expert training and strategic consulting services designed to drive growth, improve efficiency, and achieve sustainable success.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <button
                   onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
+                  className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
-                <button className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 flex items-center justify-center space-x-2">
+                <button className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 flex items-center justify-center space-x-2">
                   <Download className="h-5 w-5" />
                   <span>Download Brochure</span>
                 </button>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative flex justify-center lg:justify-end mt-8 lg:mt-0">
               <img
                 src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Business training session"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
               />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg">
-                <div className="flex items-center space-x-4">
-                  <div className="bg-blue-100 p-3 rounded-lg">
-                    <Award className="h-8 w-8 text-blue-600" />
+              <div className="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-6 bg-white p-4 sm:p-6 rounded-xl shadow-lg w-48 sm:w-56">
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="bg-blue-100 p-2 sm:p-3 rounded-lg">
+                    <Award className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-gray-900">500+</p>
-                    <p className="text-gray-600">Projects Completed</p>
+                    <p className="text-lg sm:text-2xl font-bold text-gray-900">500+</p>
+                    <p className="text-gray-600 text-xs sm:text-sm">Projects Completed</p>
                   </div>
                 </div>
               </div>
@@ -209,92 +209,86 @@ const TrainingConsultingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Services Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600">Choose the service that best fits your organization's needs</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Our Services</h2>
+            <p className="text-base sm:text-xl text-gray-600">Choose the service that best fits your organization's needs</p>
           </div>
-
           {/* Service Selector */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
             {services.map((service) => {
               const Icon = service.icon;
               return (
                 <button
                   key={service.id}
                   onClick={() => setSelectedService(service.id)}
-                  className={`flex items-center space-x-3 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center space-x-2 md:space-x-3 px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 ${
                     selectedService === service.id
                       ? 'bg-blue-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  <Icon className="h-5 w-5" />
-                  <span>{service.title}</span>
+                  <Icon className="h-4 w-4 md:h-5 md:w-5" />
+                  <span className="text-sm md:text-base">{service.title}</span>
                 </button>
               );
             })}
           </div>
-
           {/* Service Details */}
           {currentService && (
-            <div className="bg-gray-50 rounded-xl p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="bg-gray-50 rounded-xl p-4 md:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div>
-                  <div className="flex items-center space-x-4 mb-6">
-                    <div className="bg-blue-100 p-4 rounded-lg">
-                      <currentService.icon className="h-8 w-8 text-blue-600" />
+                  <div className="flex items-center space-x-3 md:space-x-4 mb-4 md:mb-6">
+                    <div className="bg-blue-100 p-2 md:p-4 rounded-lg">
+                      <currentService.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold text-gray-900">{currentService.title}</h3>
-                      <p className="text-gray-600">{currentService.description}</p>
+                      <h3 className="text-lg md:text-2xl font-bold text-gray-900">{currentService.title}</h3>
+                      <p className="text-gray-600 text-sm md:text-base">{currentService.description}</p>
                     </div>
                   </div>
-                  
-                  <div className="space-y-4 mb-6">
-                    <h4 className="text-lg font-semibold text-gray-900">What's Included:</h4>
-                    <ul className="space-y-2">
+                  <div className="space-y-2 md:space-y-4 mb-4 md:mb-6">
+                    <h4 className="text-base md:text-lg font-semibold text-gray-900">What's Included:</h4>
+                    <ul className="space-y-1 md:space-y-2">
                       {currentService.features.map((feature, index) => (
-                        <li key={index} className="flex items-center space-x-2">
-                          <CheckCircle className="h-5 w-5 text-blue-600" />
-                          <span className="text-gray-700">{feature}</span>
+                        <li key={index} className="flex items-center space-x-1 md:space-x-2">
+                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
+                          <span className="text-gray-700 text-sm md:text-base">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-
-                <div className="space-y-6">
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Service Details</h4>
-                    <div className="space-y-3">
+                <div className="space-y-4 md:space-y-6">
+                  <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                    <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-4">Service Details</h4>
+                    <div className="space-y-2 md:space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Duration:</span>
-                        <span className="font-medium text-gray-900">{currentService.duration}</span>
+                        <span className="text-gray-600 text-sm md:text-base">Duration:</span>
+                        <span className="font-medium text-gray-900 text-sm md:text-base">{currentService.duration}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Investment:</span>
-                        <span className="font-medium text-gray-900">{currentService.pricing}</span>
+                        <span className="text-gray-600 text-sm md:text-base">Investment:</span>
+                        <span className="font-medium text-gray-900 text-sm md:text-base">{currentService.pricing}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Delivery:</span>
-                        <span className="font-medium text-gray-900">On-site or Remote</span>
+                        <span className="text-gray-600 text-sm md:text-base">Delivery:</span>
+                        <span className="font-medium text-gray-900 text-sm md:text-base">On-site or Remote</span>
                       </div>
                     </div>
                   </div>
-
-                  <div className="bg-white p-6 rounded-lg shadow-md">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Get Started</h4>
-                    <p className="text-gray-600 mb-4">
+                  <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                    <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-2 md:mb-4">Get Started</h4>
+                    <p className="text-gray-600 mb-2 md:mb-4 text-sm md:text-base">
                       Ready to transform your organization? Contact us for a free consultation.
                     </p>
-                    <div className="flex space-x-4">
+                    <div className="flex space-x-2 md:space-x-4">
                       <button
                         onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                        className="flex-1 bg-blue-600 text-white px-2 md:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm md:text-base"
                       >
                         Book Consultation
                       </button>
@@ -309,50 +303,45 @@ const TrainingConsultingPage = () => {
           )}
         </div>
       </section>
-
       {/* Case Studies */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Success Stories</h2>
-            <p className="text-xl text-gray-600">Real results from our client partnerships</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Success Stories</h2>
+            <p className="text-base sm:text-xl text-gray-600">Real results from our client partnerships</p>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {caseStudies.map((study) => (
-              <div key={study.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+              <div key={study.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200 flex flex-col">
                 <img
                   src={study.image}
                   alt={study.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-40 sm:h-48 object-cover"
                 />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-semibold text-gray-900">{study.title}</h3>
+                <div className="p-4 sm:p-6 flex flex-col flex-1">
+                  <div className="flex items-center justify-between mb-2 sm:mb-4">
+                    <h3 className="text-base sm:text-xl font-semibold text-gray-900">{study.title}</h3>
                     <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
                       {study.industry}
                     </span>
                   </div>
-                  
-                  <p className="text-gray-600 mb-4"><strong>Client:</strong> {study.client}</p>
-                  <p className="text-gray-600 mb-4"><strong>Challenge:</strong> {study.challenge}</p>
-                  <p className="text-gray-600 mb-4"><strong>Solution:</strong> {study.solution}</p>
-                  
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-gray-900 mb-2">Results:</h4>
+                  <p className="text-gray-600 mb-2 sm:mb-4 text-sm sm:text-base"><strong>Client:</strong> {study.client}</p>
+                  <p className="text-gray-600 mb-2 sm:mb-4 text-sm sm:text-base"><strong>Challenge:</strong> {study.challenge}</p>
+                  <p className="text-gray-600 mb-2 sm:mb-4 text-sm sm:text-base"><strong>Solution:</strong> {study.solution}</p>
+                  <div className="mb-2 sm:mb-4">
+                    <h4 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Results:</h4>
                     <ul className="space-y-1">
                       {study.results.map((result, index) => (
-                        <li key={index} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-600" />
-                          <span className="text-gray-700 text-sm">{result}</span>
+                        <li key={index} className="flex items-center space-x-1 sm:space-x-2">
+                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                          <span className="text-gray-700 text-xs sm:text-sm">{result}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
-                  
-                  <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-2">
+                  <button className="text-blue-600 hover:text-blue-700 font-medium flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base mt-auto">
                     <span>Read Full Case Study</span>
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                   </button>
                 </div>
               </div>
@@ -360,33 +349,31 @@ const TrainingConsultingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Testimonials */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Client Testimonials</h2>
-            <p className="text-xl text-gray-600">What our clients say about working with us</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Client Testimonials</h2>
+            <p className="text-base sm:text-xl text-gray-600">What our clients say about working with us</p>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-xl hover:bg-gray-100 transition-colors duration-200">
-                <div className="flex items-center mb-4">
+              <div key={index} className="bg-gray-50 p-4 sm:p-8 rounded-xl hover:bg-gray-100 transition-colors duration-200 flex flex-col">
+                <div className="flex items-center mb-2 sm:mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic">"{testimonial.text}"</p>
-                <div className="flex items-center space-x-4">
+                <p className="text-gray-700 mb-4 sm:mb-6 italic text-sm sm:text-base">"{testimonial.text}"</p>
+                <div className="flex items-center space-x-2 sm:space-x-4 mt-auto">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="h-12 w-12 rounded-full object-cover"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                    <p className="font-semibold text-gray-900 text-sm sm:text-base">{testimonial.name}</p>
+                    <p className="text-gray-600 text-xs sm:text-sm">{testimonial.role}</p>
                     <p className="text-gray-500 text-xs">{testimonial.company}</p>
                   </div>
                 </div>
@@ -395,22 +382,20 @@ const TrainingConsultingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Contact Form */}
-      <section id="booking-form" className="py-16 bg-blue-600">
+      <section id="booking-form" className="py-10 md:py-16 bg-blue-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Get Started?</h2>
-            <p className="text-xl text-blue-100">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 md:mb-4">Ready to Get Started?</h2>
+            <p className="text-base sm:text-xl text-blue-100">
               Let's discuss how we can help your organization achieve its goals.
             </p>
           </div>
-
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-xl shadow-lg p-4 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Company Name *
                   </label>
                   <input
@@ -419,11 +404,11 @@ const TrainingConsultingPage = () => {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Contact Name *
                   </label>
                   <input
@@ -432,11 +417,11 @@ const TrainingConsultingPage = () => {
                     value={formData.contactName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Email *
                   </label>
                   <input
@@ -445,11 +430,11 @@ const TrainingConsultingPage = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Phone Number
                   </label>
                   <input
@@ -457,18 +442,18 @@ const TrainingConsultingPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Industry
                   </label>
                   <select
                     name="industry"
                     value={formData.industry}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select industry</option>
                     <option value="technology">Technology</option>
@@ -481,14 +466,14 @@ const TrainingConsultingPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Team Size
                   </label>
                   <select
                     name="teamSize"
                     value={formData.teamSize}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select size</option>
                     <option value="1-10">1-10 employees</option>
@@ -499,14 +484,14 @@ const TrainingConsultingPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Service Interested In
                   </label>
                   <select
                     name="service"
                     value={formData.service}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select service</option>
                     <option value="training">Corporate Training</option>
@@ -516,14 +501,14 @@ const TrainingConsultingPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                     Timeline
                   </label>
                   <select
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select timeline</option>
                     <option value="immediate">Immediate (within 1 month)</option>
@@ -534,7 +519,7 @@ const TrainingConsultingPage = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">
                   Project Details
                 </label>
                 <textarea
@@ -543,13 +528,13 @@ const TrainingConsultingPage = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Tell us about your specific needs, challenges, or goals..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
                 ></textarea>
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+                  className="bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
                 >
                   Request Consultation
                 </button>

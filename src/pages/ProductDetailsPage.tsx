@@ -295,23 +295,23 @@ const ProductDetailsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 py-6 sm:py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 mb-8 sm:mb-12">
           {/* Product Images */}
-          <div className="space-y-4">
-            <div className="aspect-square bg-white rounded-xl overflow-hidden">
+          <div className="space-y-4 flex flex-col items-center">
+            <div className="aspect-square bg-white rounded-xl overflow-hidden w-full max-w-xs sm:max-w-md">
               <img
                 src={product.images[selectedImage]}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="flex space-x-4">
+            <div className="flex gap-2 sm:gap-4 flex-wrap justify-center">
               {product.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden border-2 ${
+                  className={`w-12 h-12 sm:w-20 sm:h-20 rounded-lg overflow-hidden border-2 ${
                     selectedImage === index ? 'border-teal-600' : 'border-gray-200'
                   }`}
                 >
@@ -324,51 +324,49 @@ const ProductDetailsPage = () => {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-extrabold text-gray-800 mb-2 tracking-tight">{product.name}</h1>
-              <div className="flex items-center space-x-4 mb-4">
-                <span className="text-gray-500">({product.reviews} reviews)</span>
+              <h1 className="text-lg sm:text-2xl font-extrabold text-gray-800 mb-2 tracking-tight text-center md:text-left">{product.name}</h1>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2 sm:mb-4 text-center md:text-left">
+                <span className="text-xs sm:text-base text-gray-500">({product.reviews} reviews)</span>
               </div>
-              
-              <div className="flex items-center space-x-4 mb-4">
-                <span className="text-3xl font-bold text-gray-800">₹{convertToINR(product.price)}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-2 sm:mb-4 text-center md:text-left">
+                <span className="text-lg sm:text-3xl font-bold text-gray-800">₹{convertToINR(product.price)}</span>
                 {product.originalPrice && (
-                  <span className="text-xl text-gray-500 line-through">₹{convertToINR(product.originalPrice)}</span>
+                  <span className="text-sm sm:text-xl text-gray-500 line-through">₹{convertToINR(product.originalPrice)}</span>
                 )}
                 {product.originalPrice && (
-                  <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded-full text-sm font-semibold">
+                  <span className="bg-teal-100 text-teal-800 px-2 py-1 rounded-full text-xs sm:text-sm font-semibold">
                     Save ₹{convertToINR(product.originalPrice - product.price)}
                   </span>
                 )}
               </div>
             </div>
 
-            <div className="space-y-4">
-              <p className="text-gray-500 text-lg">{product.description}</p>
-              
-              <div className="flex flex-wrap gap-2">
+            <div className="space-y-2 sm:space-y-4">
+              <p className="text-xs sm:text-base text-gray-500">{product.description}</p>
+              <div className="flex flex-wrap gap-1 sm:gap-2 justify-center md:justify-start">
                 {product.tags.map(tag => (
-                  <span key={tag} className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-semibold">
+                  <span key={tag} className="bg-teal-100 text-teal-800 px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-sm font-semibold">
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Key Features:</h3>
-              <ul className="space-y-2">
+            <div className="space-y-2 sm:space-y-4">
+              <h3 className="text-xs sm:text-lg font-semibold text-gray-800">Key Features:</h3>
+              <ul className="space-y-1 sm:space-y-2">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-center space-x-2">
-                    <span className="text-gray-700">{feature}</span>
+                    <span className="text-gray-700 text-xs sm:text-base">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Quantity and Add to Cart */}
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-700 font-medium">Quantity:</span>
+            <div className="space-y-2 sm:space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 gap-2">
+                <span className="text-xs sm:text-base text-gray-700 font-medium">Quantity:</span>
                 <div className="flex items-center border border-gray-300 rounded-full">
                   <button
                     onClick={() => handleQuantityChange(-1)}
@@ -376,7 +374,7 @@ const ProductDetailsPage = () => {
                   >
                     -
                   </button>
-                  <span className="px-4 py-2 font-medium">{quantity}</span>
+                  <span className="px-3 sm:px-4 py-2 font-medium">{quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(1)}
                     className="p-2 hover:bg-gray-100 transition-colors duration-300"
@@ -384,40 +382,39 @@ const ProductDetailsPage = () => {
                     +
                   </button>
                 </div>
-                <span className="text-sm text-gray-500">({product.stockCount} in stock)</span>
+                <span className="text-xs sm:text-sm text-gray-500">({product.stockCount} in stock)</span>
               </div>
-
-              <div className="flex space-x-4">
-                <button className="flex-1 bg-teal-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-teal-700 transition-colors duration-300">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                <button className="flex-1 bg-teal-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-teal-700 transition-colors duration-300 text-xs sm:text-base">
                   Add to Cart
                 </button>
               </div>
             </div>
 
             {/* Delivery Info */}
-            <div className="border-t pt-6 space-y-3">
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-700">Free shipping on orders over ₹4150</span>
+            <div className="border-t pt-4 sm:pt-6 space-y-2 sm:space-y-3">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <span className="text-xs sm:text-base text-gray-700">Free shipping on orders over ₹4150</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-700">100% satisfaction guarantee</span>
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <span className="text-xs sm:text-base text-gray-700">100% satisfaction guarantee</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <span className="text-gray-700">30-day return policy</span>
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <span className="text-xs sm:text-base text-gray-700">30-day return policy</span>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
 
         {/* Product Tabs */}
-        <div className="bg-white rounded-xl shadow-md mb-12">
+        <div className="bg-white rounded-xl shadow-md mb-8 sm:mb-12">
           <div className="border-b">
-            <nav className="flex space-x-8 px-6">
+            <nav className="flex flex-wrap gap-2 sm:gap-8 px-2 sm:px-6 text-xs sm:text-base justify-center">
               {['overview', 'ingredients', 'nutrition', 'reviews'].map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`py-4 px-2 font-medium capitalize ${
+                  className={`py-2 sm:py-4 px-2 font-medium capitalize ${
                     activeTab === tab
                       ? 'text-teal-600 border-b-2 border-teal-600'
                       : 'text-gray-500 hover:text-gray-700'
@@ -429,12 +426,12 @@ const ProductDetailsPage = () => {
             </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             {activeTab === 'overview' && (
               <div className="prose max-w-none">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Product Overview</h3>
-                <p className="text-gray-500">{product.description}</p>
-                <p className="text-gray-500">
+                <h3 className="text-xs sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-4">Product Overview</h3>
+                <p className="text-xs sm:text-gray-500">{product.description}</p>
+                <p className="text-xs sm:text-gray-500">
                   Our {product.name.toLowerCase()} is carefully crafted with the finest ingredients sourced from certified organic farms. 
                   Each batch is made in small quantities to ensure freshness and quality. Perfect for outdoor adventures, 
                   office snacking, or as a nutritious addition to your routine.
@@ -444,11 +441,11 @@ const ProductDetailsPage = () => {
 
             {activeTab === 'ingredients' && (
               <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Ingredients</h3>
-                <ul className="space-y-2">
+                <h3 className="text-xs sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-4">Ingredients</h3>
+                <ul className="space-y-1 sm:space-y-2">
                   {product.ingredients.map((ingredient, index) => (
                     <li key={index} className="flex items-center space-x-2">
-                      <span className="text-gray-700">{ingredient}</span>
+                      <span className="text-gray-700 text-xs sm:text-base">{ingredient}</span>
                     </li>
                   ))}
                 </ul>
@@ -457,21 +454,21 @@ const ProductDetailsPage = () => {
 
             {activeTab === 'nutrition' && (
               <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Nutrition Facts</h3>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="font-semibold mb-2">Serving Size: {product.nutritionFacts.servingSize}</p>
-                  <div className="grid grid-cols-2 gap-4">
+                <h3 className="text-xs sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-4">Nutrition Facts</h3>
+                <div className="bg-gray-50 p-2 sm:p-4 rounded-lg">
+                  <p className="font-semibold mb-1 sm:mb-2 text-xs sm:text-base">Serving Size: {product.nutritionFacts.servingSize}</p>
+                  <div className="grid grid-cols-2 gap-2 sm:gap-4">
                     <div>
-                      <p><span className="font-medium">Calories:</span> {product.nutritionFacts.calories}</p>
-                      <p><span className="font-medium">Total Fat:</span> {product.nutritionFacts.totalFat}</p>
-                      <p><span className="font-medium">Saturated Fat:</span> {product.nutritionFacts.saturatedFat}</p>
-                      <p><span className="font-medium">Sodium:</span> {product.nutritionFacts.sodium}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Calories:</span> {product.nutritionFacts.calories}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Total Fat:</span> {product.nutritionFacts.totalFat}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Saturated Fat:</span> {product.nutritionFacts.saturatedFat}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Sodium:</span> {product.nutritionFacts.sodium}</p>
                     </div>
                     <div>
-                      <p><span className="font-medium">Total Carbs:</span> {product.nutritionFacts.totalCarbs}</p>
-                      <p><span className="font-medium">Fiber:</span> {product.nutritionFacts.fiber}</p>
-                      <p><span className="font-medium">Sugars:</span> {product.nutritionFacts.sugars}</p>
-                      <p><span className="font-medium">Protein:</span> {product.nutritionFacts.protein}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Total Carbs:</span> {product.nutritionFacts.totalCarbs}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Fiber:</span> {product.nutritionFacts.fiber}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Sugars:</span> {product.nutritionFacts.sugars}</p>
+                      <p className="text-xs sm:text-base"><span className="font-medium">Protein:</span> {product.nutritionFacts.protein}</p>
                     </div>
                   </div>
                 </div>
@@ -480,18 +477,18 @@ const ProductDetailsPage = () => {
 
             {activeTab === 'reviews' && (
               <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Customer Reviews</h3>
-                <div className="space-y-6">
+                <h3 className="text-xs sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-4">Customer Reviews</h3>
+                <div className="space-y-4 sm:space-y-6">
                   {reviews.map(review => (
-                    <div key={review.id} className="border-b pb-6">
-                      <div className="flex items-center justify-between mb-2">
+                    <div key={review.id} className="border-b pb-4 sm:pb-6">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-1 sm:mb-2 gap-1 sm:gap-0">
                         <div className="flex items-center space-x-2">
-                          <span className="font-medium">{review.name}</span>
-                          {review.verified && <span className="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Verified Purchase</span>}
+                          <span className="font-medium text-xs sm:text-base">{review.name}</span>
+                          {review.verified && <span className="text-[10px] sm:text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded">Verified Purchase</span>}
                         </div>
-                        <span className="text-sm text-gray-500">{review.date}</span>
+                        <span className="text-[10px] sm:text-sm text-gray-500">{review.date}</span>
                       </div>
-                      <p className="text-gray-500">{review.comment}</p>
+                      <p className="text-xs sm:text-base text-gray-500">{review.comment}</p>
                     </div>
                   ))}
                 </div>
@@ -502,16 +499,16 @@ const ProductDetailsPage = () => {
 
         {/* Related Products */}
         <div>
-          <h2 className="text-2xl font-extrabold text-gray-800 mb-6 tracking-tight">You Might Also Like</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <h2 className="text-lg sm:text-2xl font-extrabold text-gray-800 mb-4 sm:mb-6 tracking-tight text-center sm:text-left">You Might Also Like</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {relatedProducts.map(rp => (
-              <Link to={`/products/${rp.id}`} key={rp.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                <img src={rp.images[0]} alt={rp.name} className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-800 mb-2">{rp.name}</h3>
+              <Link to={`/products/${rp.id}`} key={rp.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col">
+                <img src={rp.images[0]} alt={rp.name} className="w-full h-32 sm:h-48 object-cover" />
+                <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
+                  <h3 className="font-semibold text-xs sm:text-base text-gray-800 mb-1 sm:mb-2">{rp.name}</h3>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-gray-800">₹{convertToINR(rp.price)}</span>
-                    <span className="text-sm text-gray-500">{rp.rating}</span>
+                    <span className="text-xs sm:text-lg font-bold text-gray-800">₹{convertToINR(rp.price)}</span>
+                    <span className="text-[10px] sm:text-sm text-gray-500">{rp.rating}</span>
                   </div>
                 </div>
               </Link>
