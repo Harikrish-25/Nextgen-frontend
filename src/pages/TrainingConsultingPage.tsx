@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { CheckCircle, Users, TrendingUp, Award, Download, Phone, Star, ArrowRight } from 'lucide-react';
+import { apiService } from '../services/api';
 
 const TrainingConsultingPage = () => {
   const [selectedService, setSelectedService] = useState('training');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
@@ -142,47 +144,68 @@ const TrainingConsultingPage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your interest! We\'ll contact you within 24 hours to discuss your needs.');
-    setFormData({
-      companyName: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      industry: '',
-      teamSize: '',
-      service: '',
-      timeline: '',
-      message: '',
-    });
+    setIsSubmitting(true);
+
+    try {
+      const response = await apiService.submitTrainingRequest({
+        company_name: formData.companyName,
+        contact_person: formData.contactName,
+        email: formData.email,
+        phone: formData.phone,
+        training_type: formData.service || selectedService,
+        participants_count: parseInt(formData.teamSize) || 1,
+        preferred_dates: [formData.timeline],
+        requirements: `Industry: ${formData.industry}, Message: ${formData.message}`,
+      });
+
+      if (response.success) {
+        alert('Thank you for your interest! We\'ll contact you within 24 hours via WhatsApp to discuss your needs.');
+        setFormData({
+          companyName: '',
+          contactName: '',
+          email: '',
+          phone: '',
+          industry: '',
+          teamSize: '',
+          service: '',
+          timeline: '',
+          message: '',
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting training request:', error);
+      alert('Sorry, there was an error submitting your request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const currentService = services.find(s => s.id === selectedService);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-green-50 font-sans">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white">
+      <section className="bg-gradient-to-br from-green-500 to-emerald-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-4 md:space-y-6">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-center lg:text-left">
                 Training & Consulting Services
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed text-center lg:text-left">
+              <p className="text-base sm:text-lg md:text-xl text-green-100 leading-relaxed text-center lg:text-left">
                 Empower your organization with expert training and strategic consulting services designed to drive growth, improve efficiency, and achieve sustainable success.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <button
                   onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-blue-600 px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-blue-50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
+                  className="bg-white text-green-600 px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-green-50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
                 >
                   <span>Get Started</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
-                <button className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-white hover:text-blue-600 transition-all duration-200 flex items-center justify-center space-x-2">
+                <button className="border-2 border-white text-white px-6 md:px-8 py-3 md:py-4 rounded-lg text-base md:text-lg font-semibold hover:bg-white hover:text-green-600 transition-all duration-200 flex items-center justify-center space-x-2">
                   <Download className="h-5 w-5" />
                   <span>Download Brochure</span>
                 </button>
@@ -196,8 +219,8 @@ const TrainingConsultingPage = () => {
               />
               <div className="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-6 bg-white p-4 sm:p-6 rounded-xl shadow-lg w-48 sm:w-56">
                 <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="bg-blue-100 p-2 sm:p-3 rounded-lg">
-                    <Award className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+                  <div className="bg-green-100 p-2 sm:p-3 rounded-lg">
+                    <Award className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
                   </div>
                   <div>
                     <p className="text-lg sm:text-2xl font-bold text-gray-900">500+</p>
@@ -210,7 +233,7 @@ const TrainingConsultingPage = () => {
         </div>
       </section>
       {/* Services Section */}
-      <section className="py-10 md:py-16 bg-white">
+      <section className="py-10 md:py-16 bg-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Our Services</h2>
@@ -226,7 +249,7 @@ const TrainingConsultingPage = () => {
                   onClick={() => setSelectedService(service.id)}
                   className={`flex items-center space-x-2 md:space-x-3 px-4 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 ${
                     selectedService === service.id
-                      ? 'bg-blue-600 text-white shadow-lg'
+                      ? 'bg-green-600 text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -242,8 +265,8 @@ const TrainingConsultingPage = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 <div>
                   <div className="flex items-center space-x-3 md:space-x-4 mb-4 md:mb-6">
-                    <div className="bg-blue-100 p-2 md:p-4 rounded-lg">
-                      <currentService.icon className="h-6 w-6 md:h-8 md:w-8 text-blue-600" />
+                    <div className="bg-green-100 p-2 md:p-4 rounded-lg">
+                      <currentService.icon className="h-6 w-6 md:h-8 md:w-8 text-green-600" />
                     </div>
                     <div>
                       <h3 className="text-lg md:text-2xl font-bold text-gray-900">{currentService.title}</h3>
@@ -255,7 +278,7 @@ const TrainingConsultingPage = () => {
                     <ul className="space-y-1 md:space-y-2">
                       {currentService.features.map((feature, index) => (
                         <li key={index} className="flex items-center space-x-1 md:space-x-2">
-                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-blue-600" />
+                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-600" />
                           <span className="text-gray-700 text-sm md:text-base">{feature}</span>
                         </li>
                       ))}
@@ -288,7 +311,7 @@ const TrainingConsultingPage = () => {
                     <div className="flex space-x-2 md:space-x-4">
                       <button
                         onClick={() => document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="flex-1 bg-blue-600 text-white px-2 md:px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm md:text-base"
+                        className="flex-1 bg-green-600 text-white px-2 md:px-4 py-2 rounded-lg hover:bg-green-700 transition-colors duration-200 text-sm md:text-base"
                       >
                         Book Consultation
                       </button>
@@ -304,7 +327,7 @@ const TrainingConsultingPage = () => {
         </div>
       </section>
       {/* Case Studies */}
-      <section className="py-10 md:py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Success Stories</h2>
@@ -350,7 +373,7 @@ const TrainingConsultingPage = () => {
         </div>
       </section>
       {/* Testimonials */}
-      <section className="py-10 md:py-16 bg-white">
+      {/* <section className="py-10 md:py-16 bg-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 md:mb-4">Client Testimonials</h2>
@@ -381,13 +404,13 @@ const TrainingConsultingPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
       {/* Contact Form */}
-      <section id="booking-form" className="py-10 md:py-16 bg-blue-600">
+      <section id="booking-form" className="py-10 md:py-16 bg-green-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 md:mb-4">Ready to Get Started?</h2>
-            <p className="text-base sm:text-xl text-blue-100">
+            <p className="text-base sm:text-xl text-green-100">
               Let's discuss how we can help your organization achieve its goals.
             </p>
           </div>
@@ -404,7 +427,7 @@ const TrainingConsultingPage = () => {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
@@ -417,7 +440,7 @@ const TrainingConsultingPage = () => {
                     value={formData.contactName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
@@ -430,7 +453,7 @@ const TrainingConsultingPage = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
@@ -442,7 +465,7 @@ const TrainingConsultingPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   />
                 </div>
                 <div>
@@ -453,7 +476,7 @@ const TrainingConsultingPage = () => {
                     name="industry"
                     value={formData.industry}
                     onChange={handleInputChange}
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select industry</option>
                     <option value="technology">Technology</option>
@@ -473,7 +496,7 @@ const TrainingConsultingPage = () => {
                     name="teamSize"
                     value={formData.teamSize}
                     onChange={handleInputChange}
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select size</option>
                     <option value="1-10">1-10 employees</option>
@@ -491,7 +514,7 @@ const TrainingConsultingPage = () => {
                     name="service"
                     value={formData.service}
                     onChange={handleInputChange}
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select service</option>
                     <option value="training">Corporate Training</option>
@@ -508,7 +531,7 @@ const TrainingConsultingPage = () => {
                     name="timeline"
                     value={formData.timeline}
                     onChange={handleInputChange}
-                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                    className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                   >
                     <option value="">Select timeline</option>
                     <option value="immediate">Immediate (within 1 month)</option>
@@ -528,13 +551,13 @@ const TrainingConsultingPage = () => {
                   onChange={handleInputChange}
                   rows={4}
                   placeholder="Tell us about your specific needs, challenges, or goals..."
-                  className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-xs sm:text-sm"
+                  className="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-xs sm:text-sm"
                 ></textarea>
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-blue-700 transition-colors duration-200"
+                  className="bg-green-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-base sm:text-lg font-semibold hover:bg-green-700 transition-colors duration-200"
                 >
                   Request Consultation
                 </button>

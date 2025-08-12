@@ -49,39 +49,39 @@ const ProductsPage = () => {
       tags: ['Preservative-Free', 'Organic', 'Caffeine-Free'],
       description: 'Calming herbal blend for relaxation and wellness',
     },
-    {
-      id: 4,
-      name: 'Quinoa Protein Bars',
-      category: 'snacks',
-      price: 16.99,
-      image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 4.6,
-      reviews: 203,
-      tags: ['Preservative-Free', 'High-Protein', 'Gluten-Free'],
-      description: 'Protein-packed bars made with quinoa and natural ingredients',
-    },
-    {
-      id: 5,
-      name: 'Cold-Pressed Juice',
-      category: 'beverages',
-      price: 8.99,
-      image: 'https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 4.9,
-      reviews: 87,
-      tags: ['Preservative-Free', 'Fresh', 'Vitamin-Rich'],
-      description: 'Fresh cold-pressed juice with no added sugars',
-    },
-    {
-      id: 6,
-      name: 'Organic Granola',
-      category: 'organic',
-      price: 14.99,
-      image: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 4.8,
-      reviews: 178,
-      tags: ['Preservative-Free', 'Organic', 'Whole Grain'],
-      description: 'Crunchy granola made with organic oats and honey',
-    },
+    // {
+    //   id: 4,
+    //   name: 'Quinoa Protein Bars',
+    //   category: 'snacks',
+    //   price: 16.99,
+    //   image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   rating: 4.6,
+    //   reviews: 203,
+    //   tags: ['Preservative-Free', 'High-Protein', 'Gluten-Free'],
+    //   description: 'Protein-packed bars made with quinoa and natural ingredients',
+    // },
+    // {
+    //   id: 5,
+    //   name: 'Cold-Pressed Juice',
+    //   category: 'beverages',
+    //   price: 8.99,
+    //   image: 'https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   rating: 4.9,
+    //   reviews: 87,
+    //   tags: ['Preservative-Free', 'Fresh', 'Vitamin-Rich'],
+    //   description: 'Fresh cold-pressed juice with no added sugars',
+    // },
+    // {
+    //   id: 6,
+    //   name: 'Organic Granola',
+    //   category: 'organic',
+    //   price: 14.99,
+    //   image: 'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   rating: 4.8,
+    //   reviews: 178,
+    //   tags: ['Preservative-Free', 'Organic', 'Whole Grain'],
+    //   description: 'Crunchy granola made with organic oats and honey',
+    // },
   ];
 
   const filteredProducts = products.filter(product => {
@@ -133,7 +133,7 @@ const ProductsPage = () => {
               />
             </div>
             <div className="flex gap-2 sm:gap-4 w-full sm:w-auto">
-              <select
+              {/* <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="px-3 sm:px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-teal-500 focus:border-transparent text-xs sm:text-base w-full sm:w-auto"
@@ -141,7 +141,7 @@ const ProductsPage = () => {
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>{category.name}</option>
                 ))}
-              </select>
+              </select> */}
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
@@ -19,7 +19,7 @@ const LandingPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log('Newsletter signup:', email);
     setEmail('');
@@ -85,7 +85,7 @@ const LandingPage = () => {
       </section>
 
       {/* Animated Stats Section */}
-      <section className="py-10 sm:py-16 bg-gray-50">
+      {/* <section className="py-10 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-xl sm:text-3xl font-extrabold text-gray-800 mb-2 sm:mb-4 tracking-tight">Our Impact</h2>
@@ -95,7 +95,7 @@ const LandingPage = () => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`text-center p-4 sm:p-6 rounded-xl transition-all duration-500 ${
+                className={`text-center p-4 sm:p-6 rounded-xl transition-all duration-50 ${
                   currentStat === index
                     ? 'bg-teal-600 text-white transform scale-105 shadow-xl'
                     : 'bg-white text-gray-800 hover:bg-gray-100'
@@ -109,74 +109,111 @@ const LandingPage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Services Overview */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">Our Services</h2>
-            <p className="text-lg text-gray-500">Comprehensive health and wellness solutions</p>
-          </div>
-          
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+            Our Services
+          </h2>
+          <p className="text-lg text-gray-500 mb-12">
+            Comprehensive health and wellness solutions for a better tomorrow
+          </p>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Healthy Products</h3>
-              <p className="text-gray-500 mb-6">Preservative-free snacks, beverages, and wellness products crafted with care for your health.</p>
-              <Link to="/products" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors duration-300 flex items-center">
-                <span>Explore Products</span>
-              </Link>
-            </div>
-            
-            <div className="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">School Programs</h3>
-              <p className="text-gray-500 mb-6">Educational initiatives to promote healthy eating habits and wellness awareness in schools.</p>
-              <Link to="/awareness-program" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors duration-300 flex items-center">
-                <span>Learn More</span>
-              </Link>
-            </div>
-            
-            <div className="bg-gray-50 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Training & Consulting</h3>
-              <p className="text-gray-500 mb-6">Professional guidance for startups and organizations in health and wellness sectors.</p>
-              <Link to="/training-consulting" className="text-teal-600 font-semibold hover:text-teal-700 transition-colors duration-300 flex items-center">
-                <span>Get Started</span>
-              </Link>
-            </div>
+            {[
+              {
+                icon: "🌿",
+                title: "Healthy Products",
+                desc: "Preservative-free snacks, beverages, and wellness products crafted with care for your health.",
+                link: "/products",
+              },
+              {
+                icon: "🏫",
+                title: "School Programs",
+                desc: "Educational initiatives to promote healthy eating habits and wellness awareness in schools.",
+                link: "/awareness-program",
+              },
+              {
+                icon: "💼",
+                title: "Training & Consulting",
+                desc: "Professional guidance for startups and organizations in health and wellness sectors.",
+                link: "/training-consulting",
+              },
+            ].map((service, index) => (
+              <div
+                key={index}
+                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+              >
+                <div className="text-4xl mb-4">{service.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                  {service.title}
+                </h3>
+                <p className="text-gray-500 mb-6">{service.desc}</p>
+                <Link
+                  to={service.link}
+                  className="text-teal-600 font-semibold hover:text-teal-700"
+                >
+                  Learn More →
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* About Company Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-extrabold text-gray-800 mb-4 tracking-tight">About Our Company</h2>
-            <p className="text-lg text-gray-500">
-              NextGen Safe Food Solutions
-              Empowering safer, healthier lives through food safety awareness, preservative-free product innovation, and sustainable practices.
-              We educate students, support startups, and deliver nutritious, clean-label food — building a safer food ecosystem for all.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <h3 className="font-semibold text-lg text-gray-800 mb-2">Natural Products</h3>
-              <p className="text-gray-500">All our products are made from natural, high-quality ingredients with no artificial preservatives.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-gray-800 mb-2">Community Focused</h3>
-              <p className="text-gray-500">We work closely with schools and organizations to spread awareness about nutrition and wellness.</p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg text-gray-800 mb-2">Trusted Expertise</h3>
-              <p className="text-gray-500">Our team includes nutritionists and educators passionate about making a real impact.</p>
-            </div>
-          </div>
+{/* About Our Company Section */}
+<section className="bg-white text-gray-900 py-16 relative overflow-hidden">
+  <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <h2 className="text-4xl font-extrabold text-center mb-6 tracking-wide">
+      About Our Company
+    </h2>
+    <div className="text-center mb-12">
+      <p className="text-lg text-gray-600 max-w-3xl mx-auto animate-pulse">
+        We craft ideas into reality with innovation, quality, and dedication —
+        ensuring our clients experience excellence every step of the way.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "🚀 Innovation",
+          desc: "Transforming challenges into opportunities with fresh thinking.",
+          border: "border-blue-400",
+          hover: "hover:shadow-blue-200"
+        },
+        {
+          title: "✅ Quality",
+          desc: "Delivering top-tier solutions with meticulous attention to detail.",
+          border: "border-green-400",
+          hover: "hover:shadow-green-200"
+        },
+        {
+          title: "💬 Support",
+          desc: "Always here to help, ensuring your journey is smooth and successful.",
+          border: "border-pink-400",
+          hover: "hover:shadow-pink-200"
+        }
+      ].map((item, index) => (
+        <div
+          key={index}
+          className={`p-6 bg-white rounded-2xl border ${item.border} shadow-md transform hover:-translate-y-2 hover:scale-105 ${item.hover} transition-all duration-300`}
+        >
+          <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+          <p className="text-gray-600">{item.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* Newsletter Section */}
-      <section className="py-10 sm:py-16 bg-teal-600">
+      {/* <section className="py-10 sm:py-16 bg-teal-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 sm:mb-4 tracking-tight">Stay Updated</h2>
@@ -199,7 +236,7 @@ const LandingPage = () => {
             </form>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

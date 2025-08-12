@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {/* Logo - moved to left */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="bg-emerald-600 p-2 rounded-lg">
               <Leaf className="h-6 w-6 text-white" />
@@ -45,6 +45,16 @@ const Navbar = () => {
             ))}
           </div>
 
+          {/* Mobile menu button for mobile view */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
           {/* Right side icons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link
@@ -54,7 +64,7 @@ const Navbar = () => {
               <ShoppingCart className="h-6 w-6" />
             </Link>
             <Link
-              to="/profile"
+              to="/admin"
               className="p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
             >
               <User className="h-6 w-6" />
@@ -65,16 +75,6 @@ const Navbar = () => {
             >
               Shop Now
             </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
           </div>
         </div>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
                 <ShoppingCart className="h-6 w-6" />
               </Link>
               <Link
-                to="/profile"
+                to="/admin"
                 className="p-2 text-gray-700 hover:text-emerald-600 transition-colors duration-200"
               >
                 <User className="h-6 w-6" />

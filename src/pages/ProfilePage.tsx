@@ -1,48 +1,60 @@
 import React, { useState } from 'react';
-import { User, Package, MapPin, CreditCard, Bell, Shield, Edit3,  CheckCircle, Clock, Truck } from 'lucide-react';
+import { 
+  User, 
+  Package, 
+  Edit3, 
+  MapPin, 
+  CreditCard, 
+  Bell, 
+  Shield, 
+  CheckCircle, 
+  Truck, 
+  Clock 
+} from 'lucide-react';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
   const [isEditing, setIsEditing] = useState(false);
+  
   const [formData, setFormData] = useState({
     firstName: 'John',
     lastName: 'Doe',
     email: 'john.doe@example.com',
     phone: '+1 (555) 123-4567',
-    dateOfBirth: '1990-01-15',
+    dateOfBirth: '1990-01-01'
   });
 
   const orders = [
     {
-      id: 'ORD-001',
+      id: 1001,
       date: '2024-01-15',
       status: 'delivered',
       total: 45.99,
       items: [
-        { name: 'Organic Trail Mix', quantity: 2, price: 12.99 },
-        { name: 'Green Smoothie Powder', quantity: 1, price: 24.99 },
-      ],
+        { name: 'Organic Trail Mix', quantity: 2, price: 25.98 },
+        { name: 'Green Smoothie Powder', quantity: 1, price: 19.99 }
+      ]
     },
     {
-      id: 'ORD-002',
-      date: '2024-01-10',
-      status: 'processing',
-      total: 28.99,
+      id: 1002,
+      date: '2024-01-20',
+      status: 'shipped',
+      total: 32.50,
       items: [
         { name: 'Herbal Tea Blend', quantity: 1, price: 18.99 },
-        { name: 'Quinoa Protein Bars', quantity: 1, price: 16.99 },
-      ],
+        { name: 'Organic Honey', quantity: 1, price: 13.51 }
+      ]
     },
     {
-      id: 'ORD-003',
-      date: '2024-01-05',
-      status: 'shipped',
-      total: 34.99,
+      id: 1003,
+      date: '2024-01-22',
+      status: 'processing',
+      total: 67.99,
       items: [
-        { name: 'Cold-Pressed Juice', quantity: 2, price: 8.99 },
-        { name: 'Organic Granola', quantity: 1, price: 14.99 },
-      ],
-    },
+        { name: 'Protein Bars', quantity: 3, price: 45.99 },
+        { name: 'Vitamin C Tablets', quantity: 1, price: 22.00 }
+      ]
+    }
   ];
 
   const addresses = [
@@ -123,6 +135,7 @@ const ProfilePage = () => {
   const handleSaveProfile = () => {
     setIsEditing(false);
     // Save profile logic here
+    console.log('Profile saved:', formData);
   };
 
   const tabs = [

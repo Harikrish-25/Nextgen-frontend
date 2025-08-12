@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
@@ -131,126 +131,6 @@ const ProductDetailsPage = () => {
       inStock: true,
       stockCount: 60,
     },
-    {
-      id: 4,
-      name: 'Quinoa Protein Bars',
-      price: 16.99,
-      originalPrice: 19.99,
-      rating: 4.6,
-      reviews: 203,
-      images: [
-        'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600',
-      ],
-      description: 'Protein-packed bars made with quinoa and natural ingredients, perfect for a healthy snack.',
-      tags: ['Preservative-Free', 'High-Protein', 'Gluten-Free'],
-      features: [
-        'High in protein',
-        'Gluten-free',
-        'No artificial flavors',
-        'Natural sweeteners',
-      ],
-      nutritionFacts: {
-        servingSize: '1 bar (50g)',
-        calories: 200,
-        totalFat: '8g',
-        saturatedFat: '1g',
-        sodium: '50mg',
-        totalCarbs: '25g',
-        fiber: '4g',
-        sugars: '8g',
-        protein: '10g',
-      },
-      ingredients: [
-        'Organic quinoa',
-        'Organic almonds',
-        'Organic honey',
-        'Organic chia seeds',
-      ],
-      inStock: true,
-      stockCount: 40,
-    },
-    {
-      id: 5,
-      name: 'Cold-Pressed Juice',
-      price: 8.99,
-      originalPrice: 10.99,
-      rating: 4.9,
-      reviews: 87,
-      images: [
-        'https://images.pexels.com/photos/1640775/pexels-photo-1640775.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
-      ],
-      description: 'Fresh cold-pressed juice with no added sugars, packed with vitamins.',
-      tags: ['Preservative-Free', 'Fresh', 'Vitamin-Rich'],
-      features: [
-        'Cold-pressed',
-        'No added sugars',
-        'High in vitamins',
-        'Fresh ingredients',
-      ],
-      nutritionFacts: {
-        servingSize: '1 bottle (250ml)',
-        calories: 120,
-        totalFat: '0g',
-        saturatedFat: '0g',
-        sodium: '10mg',
-        totalCarbs: '28g',
-        fiber: '1g',
-        sugars: '20g',
-        protein: '1g',
-      },
-      ingredients: [
-        'Organic apple',
-        'Organic kale',
-        'Organic lemon',
-        'Organic ginger',
-      ],
-      inStock: true,
-      stockCount: 25,
-    },
-    {
-      id: 6,
-      name: 'Organic Granola',
-      price: 14.99,
-      originalPrice: 17.99,
-      rating: 4.8,
-      reviews: 178,
-      images: [
-        'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1435735/pexels-photo-1435735.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
-      ],
-      description: 'Crunchy granola made with organic oats and honey, perfect for breakfast or snacking.',
-      tags: ['Preservative-Free', 'Organic', 'Whole Grain'],
-      features: [
-        'Organic oats',
-        'Natural honey',
-        'Whole grain',
-        'No artificial additives',
-      ],
-      nutritionFacts: {
-        servingSize: '1/2 cup (50g)',
-        calories: 210,
-        totalFat: '7g',
-        saturatedFat: '1g',
-        sodium: '20mg',
-        totalCarbs: '30g',
-        fiber: '5g',
-        sugars: '10g',
-        protein: '6g',
-      },
-      ingredients: [
-        'Organic oats',
-        'Organic honey',
-        'Organic almonds',
-        'Organic sunflower seeds',
-      ],
-      inStock: true,
-      stockCount: 50,
-    },
   ];
 
   // Fix: parseInt fallback to 1 if id is undefined or not a number
@@ -282,8 +162,6 @@ const ProductDetailsPage = () => {
       verified: true,
     },
   ];
-
-  const relatedProducts = products.filter(p => p.id !== product.id).slice(0, 3);
 
   // Fix: add type for usdPrice
   const convertToINR = (usdPrice: number) => (usdPrice * 83).toFixed(2);
@@ -407,7 +285,7 @@ const ProductDetailsPage = () => {
         </div>
 
         {/* Product Tabs */}
-        <div className="bg-white rounded-xl shadow-md mb-8 sm:mb-12">
+        <div className="bg-white rounded-xl shadow-md">
           <div className="border-b">
             <nav className="flex flex-wrap gap-2 sm:gap-8 px-2 sm:px-6 text-xs sm:text-base justify-center">
               {['overview', 'ingredients', 'nutrition', 'reviews'].map(tab => (
@@ -494,25 +372,6 @@ const ProductDetailsPage = () => {
                 </div>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Related Products */}
-        <div>
-          <h2 className="text-lg sm:text-2xl font-extrabold text-gray-800 mb-4 sm:mb-6 tracking-tight text-center sm:text-left">You Might Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-            {relatedProducts.map(rp => (
-              <Link to={`/products/${rp.id}`} key={rp.id} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col">
-                <img src={rp.images[0]} alt={rp.name} className="w-full h-32 sm:h-48 object-cover" />
-                <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
-                  <h3 className="font-semibold text-xs sm:text-base text-gray-800 mb-1 sm:mb-2">{rp.name}</h3>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs sm:text-lg font-bold text-gray-800">₹{convertToINR(rp.price)}</span>
-                    <span className="text-[10px] sm:text-sm text-gray-500">{rp.rating}</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
           </div>
         </div>
       </div>
